@@ -15,14 +15,26 @@ class Nicknames
      */
     protected $index = [];
     
-    public function __construct()
+    /**
+     * A private data file path
+     * @var string
+     */
+    protected $dataFilePath = null;
+    
+    public function __construct($dataFilePath = null)
     {
+        if($dataFilePath) {
+            $this->dataFilePath = $dataFilePath;
+        } else {
+            // the default name file
+            $this->dataFilePath = dirname(__DIR__)."/data/names.csv";
+        }
         $this->buildIndex();
     }
     
     private function getDataFilePath() : string
     {
-        return dirname(__DIR__)."/data/names.csv";
+        return $this->dataFilePath;
     }    
     
     /**
@@ -34,6 +46,9 @@ class Nicknames
         return array_map('str_getcsv', file($this->getDataFilePath()));        
     }
     
+    /**
+     * Builds the searchable index
+     */
     protected function buildIndex()
     {
         $rows = $this->getRows();
@@ -61,6 +76,31 @@ class Nicknames
             return $this->index[strtolower($name)];
         }
         return [];
+    }
+    
+    /**
+     * 
+     * @param string $name
+     * @return array
+     */
+    public function fuzzy($name) : array
+    {                
+        // normalize the name
+        $name = strtolower($name);
+        
+        $r = array_filter(array_keys($this->getIndex()), 
+            function($record) use($name) { return strpos($record, $name) !== false; }
+        );  
+        if(empty($r)) {
+            return [];
+        } 
+        return array_values($r);
+    }
+    
+    public function __destruct() 
+    {
+        unset($this->index);
+        unset($this->dataFilePath);
     }
     
 }
