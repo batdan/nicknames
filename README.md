@@ -1,4 +1,20 @@
 # Nicknames 
+
+A PHP class and data file that provides an API for looking up nicknames.
+
+# Usage
+```php
+<?php
+use Yooper\Nicknames;
+$nicknames = new Nicknames();
+// the passed in values are automatically normalized to lowercase
+$names = $nicknames->query('Joe');
+```
+
+# Original Credit 
+
+https://github.com/carltonnorthern/nickname-and-diminutive-names-lookup
+
 A CSV file that containing US given names (first name) and their associated nicknames or diminutive names.
 
 This lookup file was initially created by mining this
@@ -10,11 +26,4 @@ This is a relatively large list with about 1600 names. Any help from people to c
 
 This project was created by <a href="http://www.odu.edu/">Old Dominion University</a> - <a href="http://ws-dl.blogspot.com/">Web Science and Digital Libraries Research Group</a>. More information about the creation of this lookup can be found <a href="http://www.carlton-northern.com/2010/08/lookup-for-nicknames-and-diminutive.html">here</a>.
 
-# Usage
-```php
-<?php
-use Yooper\Nicknames
-$nicknames = new Nicknames();
-// the passed in values are automatically normalized to lowercase
-$names = $nicknames->query('Joe');
-```
+
