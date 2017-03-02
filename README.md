@@ -9,6 +9,8 @@ use Yooper\Nicknames;
 $nicknames = new Nicknames();
 // the passed in values are automatically normalized to lowercase
 $names = $nicknames->query('Joe');
+// nicknames also supports fuzzy matching
+$nicknames->fuzzy('oe');
 ```
 
 # Original Credit 
