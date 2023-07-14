@@ -4,9 +4,8 @@
     "type": "library",
     "license": "MIT",
     "autoload": {
-        "psr-4": {
-            "Yooper\\": "src/"
-	}
-    },
-    "require": {},  
+            "psr-4": {
+                "Yooper\\": "src/"
+        }
+    }
 }
